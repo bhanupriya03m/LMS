@@ -1,4 +1,5 @@
-// index.js
+
+require('dotenv').config(); // Load environment variables from .env file
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors"); // Import the cors middleware
@@ -9,12 +10,11 @@ app.use(express.json());
 app.use(cors()); // Enable CORS for all routes
 
 const db = mysql.createConnection({
-  user: "root",
-  host: "localhost",
-  password: "Bhanu#03",
-  database: "library_management"
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
-
 // Handle database connection error
 db.connect((err) => {
   if (err) {
