@@ -1,13 +1,13 @@
 
-require('dotenv').config(); // Load environment variables from .env file
+require('dotenv').config(); 
 const express = require("express");
 const mysql = require("mysql");
-const cors = require("cors"); // Import the cors middleware
+const cors = require("cors"); 
 
 const app = express();
 
 app.use(express.json());
-app.use(cors()); // Enable CORS for all routes
+app.use(cors()); 
 
 const db = mysql.createConnection({
   user: process.env.DB_USER,
@@ -15,7 +15,7 @@ const db = mysql.createConnection({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME
 });
-// Handle database connection error
+
 db.connect((err) => {
   if (err) {
     console.error('Error connecting to database:', err);
@@ -24,7 +24,7 @@ db.connect((err) => {
   console.log('Connected to database successfully.');
 });
 
-// Handle query errors
+
 app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -53,6 +53,6 @@ app.get("/books", (req, res) => {
   });
 });
 
-app.listen(3001, () => {
-  console.log("Server is running in port 3001");
+app.listen(3306, () => {
+  console.log("Server is running in port 3306");
 });
